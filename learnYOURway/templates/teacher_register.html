@@ -5,7 +5,10 @@
 	<title>teacher_register</title>
 </head>
 <body>
-	<div class="container">
+
+{% load crispy_forms_tags %}
+
+	<div class="container py-5">
 		<div>
 			<h2>Register</h2>
 		</div>
@@ -13,7 +16,7 @@
 		<div class="card_body">
 			<form method="POST" novalidate>
 					{%csrf_token%}
-					{{form}}
+					{{form|crispy}}
 					<button>Submit</button>
 			</form>
 		</div>

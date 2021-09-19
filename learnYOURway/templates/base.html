@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-{% csrf_token %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>LearnYOURway</title>
 </head>
 <body>
-Hello, you are successfully logged in.
+    Hello,{{user.username}} you are successfully logged in.
+
+    {% block content %}
+	{% endblock %}
 </body>
 </html>

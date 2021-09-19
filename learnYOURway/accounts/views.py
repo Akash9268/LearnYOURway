@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView
@@ -14,9 +14,13 @@ from .forms import TeacherSignupForm,StudentSignupForm
 def register(request):
 	return render(request,'register.html')
 
+def teacher_dash(request,pk):
+	user = get_object_or_404(User,pk=pk)
+	return render(request,'teacher_dash.html',{user:user})
 
-def main_page(request):
-	return render(request,'base.html')
+def student_dash(request,pk):
+	user = get_object_or_404(User,pk=pk)
+	return render(request,'student_dash.html',{user:user})
 
 
 class teacher_register(CreateView):
@@ -67,7 +71,7 @@ def teacher_login(request):
 			elif user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("main_page")
+				return redirect('teacher_dash',pk=user.pk)
 			else:
 				messages.error(request, "Invalid username or password.")
 		else:
@@ -88,7 +92,7 @@ def student_login(request):
 			elif user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("main_page")
+				return redirect('base_page',pk=user.pk)
 			else:
 				messages.error(request, "Invalid username or password.")
 		else:
