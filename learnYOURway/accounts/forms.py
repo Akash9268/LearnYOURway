@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import User,Teacher,Student
+from .models import User,Teacher,Student
 from django.db import transaction
 from django import forms
 
@@ -7,6 +7,7 @@ from django import forms
 class TeacherSignupForm(UserCreationForm):
 	Highest_qualification = forms.CharField(required=True)
 	Description = forms.CharField(required=True)
+
 	class Meta(UserCreationForm.Meta):
 		model = User
 		fields = ('username', 'first_name', 'last_name',)
@@ -23,8 +24,10 @@ class TeacherSignupForm(UserCreationForm):
 		teacher.save()
 		return user
 
+
 class StudentSignupForm(UserCreationForm):
 	phone_no = forms.CharField(required=True)
+
 	class Meta(UserCreationForm.Meta):
 		model = User
 		fields = ('username', 'first_name', 'last_name',)
