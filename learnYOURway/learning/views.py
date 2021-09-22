@@ -3,18 +3,18 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .forms import CourseForm
 from django.forms.models import model_to_dict
 from accounts.models import Teacher
+
+from django.views.generic import CreateView,FormView
 # Create your views here.
 
 def add_course(request,pk):
-    teacher = get_object_or_404(Teacher,pk = pk)
-    print(teacher.user.first_name)
+    teacher = get_object_or_404(Teacher,pk=pk)
     if request.method == "POST":
-        form = CourseForm(request.POST,instance=teacher)
+        form = CourseForm(teacher,request.POST)
         if form.is_valid():
             form.save()
             return redirect('teacher_dash',pk=pk)
     else:
-        data = {'Taught_by':'teacher'}
-        form = CourseForm(initial=data)
+        form = CourseForm(teacher)
 
-    return render(request,'course_form.html',{'form' : form})
+    return render(request,'course_form.html',{'form' : form,'teacher' : teacher})
