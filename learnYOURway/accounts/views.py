@@ -8,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import User,Teacher,Student
 from .forms import TeacherSignupForm,StudentSignupForm
+from learning.models import Course
 # Create your views here.
 
 
@@ -23,7 +24,8 @@ def register(request):
 
 def teacher_dash(request,pk):
     user = get_object_or_404(User,pk=pk)
-    return render(request,'teacher_dash.html',{user:user})
+    course_list = Course.objects.filter(taught_by=pk)
+    return render(request,'teacher_dash.html',{"user":user,"course_list":course_list})
 
 
 def student_dash(request,pk):

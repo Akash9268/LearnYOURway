@@ -3,7 +3,6 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .forms import CourseForm
 from django.forms.models import model_to_dict
 from accounts.models import Teacher
-
 from django.views.generic import CreateView,FormView
 # Create your views here.
 
