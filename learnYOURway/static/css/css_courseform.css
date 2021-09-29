@@ -18,8 +18,7 @@ body {
   font-size: 12px;
   line-height: 30px;
   color: #777;
-  background: #4CAF50;
-  background-color: #FFAB91;
+  background: #2196f3ab;
 }
 
 .container {
@@ -52,20 +51,14 @@ body {
   margin-bottom: 10px;
 }
 
-#contact h4 {
-  margin: 5px 0 15px;
-  display: block;
-  font-size: 13px;
-  font-weight: 400;
+.inline1,
+.inline2{
+display:inline-block;
+width:48%;
+vertical-align:top;
 }
 
-fieldset {
-  border: medium none !important;
-  margin: 0 0 10px;
-  min-width: 100%;
-  padding: 0;
-  width: 100%;
-}
+
 
 #contact input[type="text"],
 #contact input[type="email"],
@@ -96,11 +89,16 @@ fieldset {
   resize: none;
 }
 
+.inline{
+display:inline-block;
+width:30%;
+}
+
 #contact button[type="submit"] {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: black;
+  background: #4CAF50;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -108,7 +106,7 @@ fieldset {
 }
 
 #contact button[type="submit"]:hover {
-  background: #FFAB91;
+  background: #2196f3ab;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;

@@ -1,25 +1,107 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>teacher_register</title>
+	<title>For Teacher</title>
+	<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+<link rel="stylesheet" href="{% static 'css/css_teacher.css' %}">
+
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
 </head>
 <body>
 
 {% load crispy_forms_tags %}
 
-	<div class="container py-5">
-		<div>
-			<h2>Register</h2>
-		</div>
 
-		<div class="card_body">
-			<form method="POST" novalidate>
-					{%csrf_token%}
-					{{form|crispy}}
-					<button>Submit</button>
-			</form>
-		</div>
+
+	{% csrf_token %}
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>LogIn </span><span>Register</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log">
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<form method="post">
+									{% csrf_token %}
+									<div class="card-front">
+										<div class="center-wrap">
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">Log In</h4>
+												<div class="form-group">
+													<input type="text" class="form-style" placeholder="Your Username" id="logemail" autocomplete="off" {% if login_form.is_bound %} value="{{ login_form.username }}{% endif %}">
+													<i class="input-icon uil uil-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" value="{{ login_form.password }}" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+												<button class='btn mp-4'name="submit" type="submit" value="login">submit</button>
+												<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form method="post">
+									<div class="card-back">
+										<div class="center-wrap">
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">Register</h4>
+												<div class="form-group">
+													<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+													<i class="input-icon uil uil-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+													<i class="input-icon uil uil-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+												<button class="btn mp-4" name="submit" type="submit" value="register">submit</button>
+											</div>
+										</div>
+									</div>
+								</form>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
 	</div>
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+
+
+
+
+
+
 </body>
 </html>

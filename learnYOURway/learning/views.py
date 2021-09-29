@@ -10,7 +10,9 @@ def add_course(request,pk):
     teacher = get_object_or_404(Teacher,pk=pk)
     if request.method == "POST":
         form = CourseForm(teacher,request.POST)
+        print("hello")
         if form.is_valid():
+            print("hello2")
             form.save()
             return redirect('teacher_dash',pk=pk)
     else:

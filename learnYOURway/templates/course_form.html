@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
     <meta charset="UTF-8">
     <title>Add Course</title>
 	<link rel="stylesheet" href="{%  static  'css/css_courseform.css'  %}">
@@ -9,20 +8,39 @@
 <body>
 {% load crispy_forms_tags %}
 
-	<div class="container py-5">
-		<div>
-			<h2>Add Course</h2>
-		</div>
-
-		<div class="card_body">
-			<form method="POST" novalidate>
-					{%csrf_token%}
-					{{form|crispy}}
-					<button>Submit</button>
-
-
-			</form>
-		</div>
+<div class="container">
+  <form id="contact" action="" method="POST">
+	  {% csrf_token %}
+    <h3>Add Course</h3>
+	<div>
+      {{form.taught_by|as_crispy_field}}
 	</div>
+    <div>
+      {{form.Subject_name|as_crispy_field}}
+    </div>
+	  <div class="inline1">
+		  {{form.Course_fee|as_crispy_field}}
+	  </div>
+    <div class="inline2">
+		{{form.tag|as_crispy_field}}
+    </div>
+	  <div>
+      {{form.Duration|as_crispy_field}}
+    </div>
+    <div>
+      {{form.Class_link|as_crispy_field}}
+    </div>
+
+    <div>
+		{{form.Description|as_crispy_field}}
+    </div>
+    <div>
+      <button name="submit" type="submit" id="contact-submit" value="Submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+
+
 </body>
 </html>
