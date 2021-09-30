@@ -1,5 +1,4 @@
 
-
 /* Please ❤ this if you like it! */
 
 
@@ -11,7 +10,7 @@ body{
 	font-size: 15px;
 	line-height: 1.7;
 	color: #c4c3ca;
-	background-color: #1f2029;
+	background-color: #2196f3ab;
 	overflow-x: hidden;
 }
 a {
@@ -113,7 +112,7 @@ h6 span{
 .card-front, .card-back {
   width: 100%;
   height: 100%;
-  background-color: #2a2b38;
+  background-color: #05386B;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
@@ -262,7 +261,7 @@ h6 span{
   background-color: #ffeba7;
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-  margin: 10px
+  margin: 10px;
 }
 .btn:active,
 .btn:focus{

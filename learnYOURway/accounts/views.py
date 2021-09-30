@@ -132,6 +132,7 @@ def teacher_login_or_register(request):
         elif request.POST.get('submit') == 'register':
             form = TeacherSignupForm(request.POST)
             if form.is_valid():
+                print("Hello")
                 user = form.save();
                 login(request,user);
                 messages.success(request,'Registration successful.')

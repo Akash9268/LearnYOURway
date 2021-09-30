@@ -14,8 +14,8 @@ class User(AbstractUser):
 
 class Teacher(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key =True)
-	Highest_qualification = models.CharField(max_length=100)
-	Description = models.TextField(blank=True,validators=[MinLengthValidator(70)])
+	Highest_qualification = models.CharField(max_length=100,null=True,blank=True)
+	Description = models.TextField(null=True,blank=True,validators=[MinLengthValidator(70)])
 
 	def __str__(self):
 		return self.user.first_name

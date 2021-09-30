@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>For Teacher</title>
-	<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<html lang="en"><head>
+
+  <meta charset="UTF-8">
+
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
 <meta name="apple-mobile-web-app-title" content="CodePen">
 
 <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
 
 <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>For Teacher</title>
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
@@ -27,59 +31,75 @@
     window.parent.postMessage("resize", "*");
   }
 </script>
-</head>
-<body>
 
-{% load crispy_forms_tags %}
-{% csrf_token %}
+
+</head>
+
+
 
 	<div class="section">
 		<div class="container">
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Register</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log">
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
 							<div class="card-3d-wrapper">
+
 								<div class="card-front">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Log In</h4>
+											<form method="post">
+												{% csrf_token %}
 											<div class="form-group">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-												<i class="input-icon uil uil-at"></i>
+												<label for="login">Username</label>
+												{{login_form.username}}
 											</div>
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
+												<label for="login">Password</label> &nbsp;
+												{{login_form.password}}
 											</div>
-											<a href="#" class="btn mt-4">submit</a>
+											<button class='btn mp-4'name="submit" type="submit" value="login">submit</button>
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
-				      					</div>
+											</form>
+										</div>
 			      					</div>
 			      				</div>
+
+
+
 								<div class="card-back">
 									<div class="center-wrap">
 										<div class="section text-center">
-											<h4 class="mb-4 pb-3">Sign Up</h4>
+											<h4 class="mb-4 pb-3">Register</h4>
+											<form method="post">
+												{% csrf_token %}
 											<div class="form-group">
-												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
-												<i class="input-icon uil uil-user"></i>
+												<label for="register">Username</label>
+												{{register_form.username}}
 											</div>
 											<div class="form-group mt-2">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-												<i class="input-icon uil uil-at"></i>
+												<label for="register">First Name</label>
+												{{register_form.first_name}}
 											</div>
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
+												<label for="register">Last Name</label>
+												{{register_form.last_name}}
 											</div>
-											<a href="#" class="btn mt-4">submit</a>
+												<div class="form-group mt-2">
+												<label for="register">Password &nbsp;</label>
+												{{register_form.password1}}
+											 	</div>
+
+											<button class="btn mt-4" name="submit" type="submit" value="register">Submit</button>
+												</form>
 				      					</div>
 			      					</div>
 			      				</div>
+
 			      			</div>
 			      		</div>
 			      	</div>
@@ -87,10 +107,14 @@
 	      	</div>
 	    </div>
 	</div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
 
 
 
 
 
-</body>
-</html>
+
+
+
+
+</body></html>
