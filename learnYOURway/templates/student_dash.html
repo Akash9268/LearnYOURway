@@ -1,2 +1,5 @@
-{% extends "learnYOURway/base.html" %}
-{% block content %}
+  <div class="body-text">
+    <h1>Hello {{user.username}}</h1>
+    <p>You are successfully logged in</p>
+    <a href="{% url 'course_list' pk=user.pk %}">add course</a>
+  </div>

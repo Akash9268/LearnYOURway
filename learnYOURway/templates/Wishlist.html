@@ -1,0 +1,4 @@
+{% for course in courses %}
+    <li>{{course.Subject_name}}</li>
+    <a class="btn btn-primary" href="{% url 'remove_course' pk=course.pk pk2=student.pk %}">Remove</a>
+{% endfor %}

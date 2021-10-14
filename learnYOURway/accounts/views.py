@@ -30,8 +30,7 @@ def teacher_dash(request,pk):
 
 def student_dash(request,pk):
     user = get_object_or_404(User,pk=pk)
-    return render(request,'student_dash.html',{user:user})
-
+    return render(request,'student_dash.html',{"user":user})
 
 class teacher_register(CreateView):
     model = User
@@ -45,7 +44,7 @@ class teacher_register(CreateView):
     def validate(self,form):
         user = form.save()
         login(self.request,user)
-        return redirect('/')
+        return redirect('student_login')
 
     def get_success_url(self):
         return reverse('register')
@@ -102,7 +101,7 @@ def student_login(request):
             elif user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect('base_page',pk=user.pk)
+                return redirect('student_dash',pk=user.pk)
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -132,7 +131,6 @@ def teacher_login_or_register(request):
         elif request.POST.get('submit') == 'register':
             form = TeacherSignupForm(request.POST)
             if form.is_valid():
-                print("Hello")
                 user = form.save();
                 login(request,user);
                 messages.success(request,'Registration successful.')

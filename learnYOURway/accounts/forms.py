@@ -8,7 +8,7 @@ class TeacherSignupForm(UserCreationForm):
 
 	class Meta(UserCreationForm.Meta):
 		model = User
-		fields = ('username', 'first_name', 'last_name')
+		fields = ('username', 'first_name', 'last_name','password1','password2')
 
 	@transaction.atomic
 	def save(self,commit=True):
