@@ -8,7 +8,7 @@ from learning.models import Course
 from accounts.models import Student
 # Create your views here.
 
-def add_course(request,pk):
+def add_course_teacher(request,pk):
     teacher = get_object_or_404(Teacher,pk=pk)
     if request.method == "POST":
         form = CourseForm(teacher,request.POST)

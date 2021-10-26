@@ -140,3 +140,37 @@ def teacher_login_or_register(request):
     register_form = TeacherSignupForm()
     login_form = AuthenticationForm()
     return render(request,template_name='teacher_register.html',context={'login_form':login_form,'register_form':register_form})
+
+
+def student_login_or_register(request):
+    if request.method == 'POST':
+        if request.POST.get('submit') == 'login':
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                if user.is_student is False:
+                    messages.error(request, "Invalid username.")
+                elif user is not None:
+                    login(request, user)
+                    messages.info(request, f"You are now logged in as {username}.")
+                    return redirect('student_dash', pk=user.pk)
+                else:
+                    messages.error(request, "Invalid username or password.")
+            else:
+                messages.error(request, "Invalid username or password.")
+        elif request.POST.get('submit') == 'register':
+            form = StudentSignupForm(request.POST)
+            if form.is_valid():
+                print("Hello")
+                user = form.save();
+                login(request,user);
+                messages.success(request,'Registration successful.')
+                return redirect('/')
+            print("Unsuccesful")
+            messages.error(request,'Unsuccessful registration, Invalid Information')
+    register_form = StudentSignupForm()
+    login_form = AuthenticationForm()
+    return render(request,template_name='student_register.html',context={'login_form':login_form,'register_form':register_form})

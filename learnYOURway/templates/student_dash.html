@@ -1,5 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<title>LearnYOURway</title>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%  static  'css/css_dashboard.css'  %}">
+
+
+<div class="menu-container">
+
+  <input type="checkbox" id="openmenu" class="hamburger-checkbox">
+
+  <div class="hamburger-icon">
+    <label for="openmenu" id="hamburger-label">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+    <div class="menu-pane">
+
+      <nav>
+         <ul class="menu-links">
+                     <li><a href="">Profile</a>
+                       <span id="DC-info">
+          </span></li>
+             <li><a href="{% url 'course_list' pk=user.pk %}">Add Course</a></li>
+        </ul>
+      </nav>
+    </div>
   <div class="body-text">
     <h1>Hello {{user.username}}</h1>
     <p>You are successfully logged in</p>
-    <a href="{% url 'course_list' pk=user.pk %}">add course</a>
+      {% for course in course_list %}
+      <li> {{course.Subject_name}} </li>
+      {% endfor %}
   </div>
+</div>
+
+
+        {% block content %}
+        {% endblock %}
+    </body>
+
+</html>

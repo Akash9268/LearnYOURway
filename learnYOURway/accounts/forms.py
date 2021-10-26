@@ -22,11 +22,10 @@ class TeacherSignupForm(UserCreationForm):
 
 
 class StudentSignupForm(UserCreationForm):
-	phone_no = forms.CharField(required=True)
 
 	class Meta(UserCreationForm.Meta):
 		model = User
-		fields = ('username', 'first_name', 'last_name',)
+		fields = ('username', 'first_name', 'last_name','password1','password2')
 
 	@transaction.atomic
 	def save(self,commit=True):
@@ -35,7 +34,6 @@ class StudentSignupForm(UserCreationForm):
 		if commit:
 			user.save()
 		student = Student.objects.create(user=user)
-		student.phone_no = self.cleaned_data["phone_no"]
 		student.save()
 		return user
 

@@ -23,7 +23,7 @@ class Teacher(models.Model):
 class Student(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key =True)
 	courses = models.ManyToManyField(Course)
-	phone_no = models.CharField(max_length=10)
+	phone_no = models.CharField(max_length=10,null=True,blank=True)
 	email_id = models.EmailField(max_length=100,null=True, blank=True)
 
 
