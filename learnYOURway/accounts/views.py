@@ -131,8 +131,8 @@ def teacher_login_or_register(request):
         elif request.POST.get('submit') == 'register':
             form = TeacherSignupForm(request.POST)
             if form.is_valid():
-                user = form.save();
-                login(request,user);
+                user = form.save()
+                login(request,user)
                 messages.success(request,'Registration successful.')
                 return redirect('/')
             messages.error(request,'Unsuccessful registration, Invalid Information')
@@ -165,11 +165,10 @@ def student_login_or_register(request):
             form = StudentSignupForm(request.POST)
             if form.is_valid():
                 print("Hello")
-                user = form.save();
-                login(request,user);
+                user = form.save()
+                login(request,user)
                 messages.success(request,'Registration successful.')
                 return redirect('/')
-            print("Unsuccesful")
             messages.error(request,'Unsuccessful registration, Invalid Information')
     register_form = StudentSignupForm()
     login_form = AuthenticationForm()
