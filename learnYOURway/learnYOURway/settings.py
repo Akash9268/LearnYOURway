@@ -125,3 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,  'static'),]
+
+RAZORPAY_API_KEY = 'rzp_test_lqp2HUBbE1ZsOq'
+RAZORPAY_API_SECRET_KEY = 'L0ZyraAVL2JzfcZBSLvbEzqN'

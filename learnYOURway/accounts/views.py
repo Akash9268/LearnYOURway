@@ -13,8 +13,8 @@ from learning.models import Course
 
 
 def logout_view(request):
-    if request.method == "POST":
         logout(request)
+        messages.info(request, "Logged out successfully!")
         return redirect('/')
 
 

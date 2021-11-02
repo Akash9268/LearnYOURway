@@ -1,16 +1,109 @@
-<div class="row">
-    <div class="col">
-        <div class="card card-body">
+<!-- Student add course-->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<title>LearnYOURway</title>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%  static  'css/css_dashboard.css'  %}">
+    <link rel="stylesheet" href="{%  static  'css/css_course_card.css'  %}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<img  src="{% static 'images/logo2.svg' %}" alt=""  height="90" class="logo">
+<header>
+    <div class="container">
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="">ABOUT</a></li>
+                <li><a href="">CONTACT</a></li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<body>
+{% load crispy_forms_tags %}
+
+<div class="menu-container">
+
+    <input type="checkbox" id="openmenu" class="hamburger-checkbox" style="margin-top:100px; padding-left:10px;" >
+
+    <div class="hamburger-icon" style="margin-top:100px; padding-left:10px;">
+        <label for="openmenu" id="hamburger-label">
+             <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+        </label>
+
+    </div>
+
+    <div class="menu-pane">
+        <nav>
+            <ul class="menu-links" style="margin-top:50px;">
+                 <li><a href="">Hello {{user.username}}</a>
+                 </li>
+                <li><a href="{% url 'course_list' pk=student.pk %}">Add Course</a></li>
+                <li><a href="{% url 'wishlist' pk=user.pk %}">View Wishlist</a></li>
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+<div class="wrapper">
+    <div class="header" style="text-align:center">
+        <div style="text-align:center">
+            <h1>SEARCH COURSE</h1>
+        </div>
             <form method="get">
-                {{myFilter.form}}
-                <button type="submit" class="btn btn-primary">Search</button>
+                {% csrf_token %}
+                <div class="container">
+                    <div class="search_warp search_wrap1">
+                        <div class="search_box">
+                            <label>Tutor:</label>
+                            {{myFilter.form.taught_by}}
+                            <label>Course Name:</label>
+                            {{myFilter.form.tag}}
+                            <button type="submit" class="btn btn-outline-dark" style="margin:10px"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-</div>
-{% for course in courses %}
-    <li>{{course.Subject_name}}</li>
-    <a class="btn btn-primary" href="{% url 'add_course' pk=course.pk pk2=student.pk %}">Add</a>
-{% endfor %}
 
-<a class="btn btn-primary" href="{% url 'wishlist' pk=student.pk %}">Wishlist</a>
+
+
+<div class="list">
+{% for course in courses %}
+    <div class="row">
+        <div class="column">
+            <a href="{% url 'course_desc' pk=course.pk pk2=student.pk %}" style="text-decoration: none;">
+                <div class="card">
+                    <p>Course Name: <i>{{course.Subject_name}}</i></p>
+                    <p>Tutor: <i>{{course.taught_by}}</i> </p>
+                    <p>Cost: <i>{{course.Course_fee}}</i></p>
+                    <p><a href="{% url 'add_course' pk=course.pk pk2=student.pk%}">Add</a></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </body>
+
+</html>
+

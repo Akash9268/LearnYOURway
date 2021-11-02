@@ -8,14 +8,33 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="{%  static  'css/css_dashboard.css'  %}">
 
+<body>
+
+<img  src="{% static 'images/logo2.svg' %}" alt=""  height="90" class="logo">
+<header>
+    <div class="container">
+
+        <nav class="navbar">
+            <ul>
+
+                <li><a href="">HOME</a></li>
+                <li><a href="">ABOUT</a></li>
+                <li><a href="">CONTACT</a></li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>
 
 <div class="menu-container">
 
-  <input type="checkbox" id="openmenu" class="hamburger-checkbox">
+  <input type="checkbox" id="openmenu" class="hamburger-checkbox" style="margin-top:100px; padding-left:10px;">
 
-  <div class="hamburger-icon">
+  <div class="hamburger-icon" style="margin-top:100px; padding-left:10px;">
     <label for="openmenu" id="hamburger-label">
       <span></span>
       <span></span>
@@ -27,26 +46,23 @@
     <div class="menu-pane">
 
       <nav>
-         <ul class="menu-links">
-                     <li><a href="">Profile</a>
-                       <span id="DC-info">
-          </span></li>
-          <li><a href="{% url 'add_course_teacher' pk=user.pk %}">Create Course </a></li>
+         <ul class="menu-links" style="margin-top:50px;">
+             <li><a href="">Hello {{user.username}}</a>
+                       </li>
+
+             <li><a href="{% url 'add_course_teacher' pk=user.pk %}">Create Course </a></li>
+             <li><a href="{% url 'logout_view' %}">Logout</a></li>
         </ul>
       </nav>
     </div>
-  <div class="body-text">
-    <h1>Hello {{user.username}}</h1>
-    <p>You are successfully logged in</p>
-      {% for course in course_list %}
-      <li> {{course.Subject_name}} </li>
-      {% endfor %}
-  </div>
+
 </div>
+  <div class="body-text">
+
+      <p>You are successfully logged in</p>
+  </div>
 
 
-        {% block content %}
-        {% endblock %}
     </body>
 
 </html>
