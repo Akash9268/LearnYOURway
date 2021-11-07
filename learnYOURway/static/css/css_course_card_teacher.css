@@ -1,0 +1,45 @@
+.list{
+border:solid;
+border-radius:10px;
+background-color:#9AD0E2;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+  margin:10px;
+}
+
+
+.row {margin: 0 -5px;}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  text-align: left;
+  background-color: #FFCB9A;
+  border-radius:20px;
+  box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+  transition: all .5s ease;
+  width:930px;
+ }
+

@@ -204,11 +204,6 @@ display: block;
   opacity: 0;
 }
 
-
-
-
-
-
 input.hamburger-checkbox {
   position: absolute;
   z-index: 3;
@@ -218,5 +213,7 @@ input.hamburger-checkbox {
   opacity: 0;
   height: 6vh;
 }
+
+
 
 

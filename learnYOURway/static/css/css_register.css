@@ -1,32 +1,11 @@
 body {
   margin:0;
-}
-
-.bg {
-  animation:slide 3s ease-in-out infinite alternate;
-  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
-  bottom:0;
-  left:-50%;
-  opacity:.5;
-  position:fixed;
-  right:-50%;
-  top:0;
-  z-index:-1;
-}
-
-.bg2 {
-  animation-direction:alternate-reverse;
-  animation-duration:4s;
-}
-
-.bg3 {
-  animation-duration:5s;
+  background-color: #2196f3ab;
 }
 
 .content {
-  background-color:rgba(255,255,255,.5);
-  box-shadow:0 0 .25em rgba(0,0,0,.10);
   box-sizing:border-box;
+  background-color: #05386B;
   left:50%;
   padding:10vmin;
   position:fixed;
@@ -39,14 +18,6 @@ h1 {
   font-family:monospace;
 }
 
-@keyframes slide {
-  0% {
-    transform:translateX(-25%);
-  }
-  100% {
-    transform:translateX(25%);
-  }
-}
 
 body
       {
@@ -96,6 +67,7 @@ body
     {
       background-color: #212121e8;
       color: white;
+      border-radius:10px;
     }
 
     .box2
