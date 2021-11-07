@@ -84,7 +84,8 @@
                                         "callback_url": "{{callbackURL}}",
                                         "prefill": { "name": "{{user.first_name}}",
                                                      "email": "{{student.email_id}}" + "@example.com",
-                                                     "contact": {{student.phone_no}}},
+                                                     "contact": "{{student.phone_no}}"
+                                                     },
                                         "theme": { "color": "#3399cc" }};
                 var rzp1 = new Razorpay(options);
                 document.getElementById('rzp-button1').onclick = function(e){

@@ -13,6 +13,7 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=True)
+    email_id = models.EmailField(max_length=100,null=True,blank=True,default=None)
 
 
 class Teacher(models.Model):
@@ -21,14 +22,13 @@ class Teacher(models.Model):
     Description = models.TextField(null=True, blank=True, validators=[MinLengthValidator(70)])
 
     def __str__(self):
-        return self.user.first_name
+        return self.user.first_name + self.user.last_name
 
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     courses = models.ManyToManyField(Course)
     phone_no = models.CharField(max_length=10, null=True, blank=True)
-    email_id = models.EmailField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.user.first_name

@@ -1,15 +1,38 @@
+from __future__ import print_function
+import os.path
+from google import auth
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from googleapiclient import errors
+from django.http import HttpResponse
+import requests
+
+from learning.forms import CourseForm
+
+import json
+import os
+
+from django.contrib import messages
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from django.views.generic import CreateView
-from django.urls import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import messages
 from .models import User,Teacher,Student
 from .forms import TeacherSignupForm,StudentSignupForm
 from learning.models import Course
 # Create your views here.
+
+import config
+
+# If modifying these scopes, delete the file token.json.
+SCOPES = ['https://www.googleapis.com/auth/classroom.courses','https://www.googleapis.com/auth/classroom.rosters']
+
+from django.shortcuts import render
+import os
+
 
 
 def logout_view(request):
@@ -32,83 +55,6 @@ def student_dash(request,pk):
     user = get_object_or_404(User,pk=pk)
     return render(request,'student_dash.html',{"user":user})
 
-class teacher_register(CreateView):
-    model = User
-    form_class = TeacherSignupForm
-    template_name = 'teacher_register.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'teacher'
-        return super().get_context_data(**kwargs)
-
-    def validate(self,form):
-        user = form.save()
-        login(self.request,user)
-        return redirect('student_login')
-
-    def get_success_url(self):
-        return reverse('register')
-
-
-class Student_register(CreateView):
-    model = User
-    form_class = StudentSignupForm
-    template_name = 'student_register.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'student'
-        return super().get_context_data(**kwargs)
-
-    def validate(self,form):
-        user = form.save()
-        login(self.request,user)
-        return redirect('/')
-
-    def get_success_url(self):
-        return reverse('register')
-
-
-def teacher_login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user.is_teacher is False:
-                messages.error(request,"Invalid username.")
-            elif user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect('teacher_dash',pk=user.pk)
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request=request, template_name="teacher_login.html", context={"login_form": form})
-
-
-def student_login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user.is_student is False:
-                messages.error(request,"Invalid username.")
-            elif user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect('student_dash',pk=user.pk)
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request=request, template_name="student_login.html", context={"login_form": form})
-
 
 def teacher_login_or_register(request):
     if request.method == 'POST':
@@ -123,6 +69,25 @@ def teacher_login_or_register(request):
                 elif user is not None:
                     login(request, user)
                     messages.info(request, f"You are now logged in as {username}.")
+                    creds = None
+                    # The file token.json stores the user's access and refresh tokens, and is
+                    # created automatically when the authorization flow completes for the first
+                    # time.
+                    if os.path.exists('token.json'):
+                        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+                    # If there are no (valid) credentials available, let the user log in.
+                    if not creds or not creds.valid:
+                        if creds and creds.expired and creds.refresh_token:
+                            creds.refresh(Request())
+                        else:
+                            flow = InstalledAppFlow.from_client_secrets_file(
+                                'credentials.json', SCOPES)
+                            creds = flow.run_local_server(port=0)
+                        # Save the credentials for the next run
+                        with open('token.json', 'w') as token:
+                            token.write(creds.to_json())
+                    config.service = build('classroom', 'v1', credentials=creds)
+                    
                     return redirect('teacher_dash', pk=user.pk)
                 else:
                     messages.error(request, "Invalid username or password.")
